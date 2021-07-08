@@ -1,10 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import GameBoard from './GameBoard';
 
 function App() {
+  let size = 8;
+  let mines = 8;
+
   return (
     <div className="App">
-      <header className="App-header">
+      <h1>MinesweeperReact</h1>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +22,8 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <GameBoard size={size} mines={mines}></GameBoard>
     </div>
   );
 }
