@@ -1,14 +1,11 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import GameBoard from './GameBoard';
+
+import Game from './Game';
 
 function App() {
-  let size = 8;
-  let mines = 8;
-
   return (
     <div className="App">
-      <h1>MinesweeperReact</h1>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -23,7 +20,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <GameBoard size={size} mines={mines}></GameBoard>
+      <Game></Game>
     </div>
   );
 }

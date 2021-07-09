@@ -8,6 +8,10 @@ type GameBoardCellProps = {
 }
 
 function GameBoardCell(props: GameBoardCellProps) {
+  function clickCell(e: any) {
+    console.info("clicked cell:", e); // DEBUG
+  }
+
   let contents;
   if ( props.cell.hasMine ) {
     contents = <span>X</span>
@@ -15,7 +19,7 @@ function GameBoardCell(props: GameBoardCellProps) {
     contents = <span>O</span>
   }
   return (
-    <div className="cell">
+    <div className="cell" onClick={clickCell}>
       {contents}
     </div>
   );

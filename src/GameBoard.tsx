@@ -1,44 +1,49 @@
 
+import React from 'react';
+
 import GameBoardCell from './GameBoardCell';
 import Grid from './grid';
+import Cell from './cell';
 
-// function GameBoardRow(size) {
-//   return (
-//     <div className="row">
-
-//     </div>
-//   )
-// }
+import './GameBoard.css';
 
 type GameBoardProps = {
   size: number,
   mines: number,
 }
 
-// future props: grid
-function GameBoard(props: GameBoardProps) {
-  console.info("GameBoard:", props); // DEBUG
+type GameBoardState = {
+  grid: Grid,
+}
 
-  const grid = new Grid(props.size, props.mines);
-  console.info("--grid:", grid); // DEBUG
+class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
+  constructor(props: GameBoardProps) {
+    super(props);
+    console.info("GameBoard:", props); // DEBUG
 
-  const renderedGrid = grid.cells.map(row => {
-    const renderedRow = row.map(cell => <GameBoardCell cell={cell}></GameBoardCell>)
-    return <div className="row">{renderedRow}</div>
-  });
-  console.info("--renderedGrid:", renderedGrid); // DEBUG
+    this.state = {
+      grid: new Grid(props.size, props.mines),
+    }
 
-  // const row = new Array(props.size).fill(<GameBoardCell></GameBoardCell>);
-  // console.info("--row:", row); // DEBUG
-  return (
-    <div className="game-board">
-      {renderedGrid}
-      {/* <div className="row">
-        {row}
-      </div> */}
-    </div>
-  )
+    console.info("GameBoard state:", this.state); // DEBUG
+  }
+
+  render() {
+    const renderedGrid = this.state.grid.cells.map((row: Array<Cell>, rx: number) => {
+      const renderedRow = row.map((cell: Cell, cx: number) => {
+        const key = `${rx}-${cx}`;
+        return <GameBoardCell cell={cell} key={key}></GameBoardCell>
+      });
+      return <div className="row" key={rx}>{renderedRow}</div>
+    });
+    console.info("--renderedGrid:", renderedGrid); // DEBUG
+
+    return (
+      <div className="game-board">
+        {renderedGrid}
+      </div>
+    )
+  }
 }
 
 export default GameBoard;
-

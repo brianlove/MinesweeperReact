@@ -1,0 +1,18 @@
+.minesweeper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.notifications {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.victory {
+  color: green;
+}
+
+.defeat {
+  color: red;
+}
