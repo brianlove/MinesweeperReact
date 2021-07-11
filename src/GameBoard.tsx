@@ -5,14 +5,14 @@ import GameBoardCell from './GameBoardCell';
 import Grid from './grid';
 import Cell from './cell';
 
-import { GameParams, GameState } from './game-types';
+import { GameState } from './game-types';
 
 import './GameBoard.css';
 
 type GameBoardProps = {
   gameState: GameState,
   gameFinished: (didPlayerWin: boolean|undefined) => void,
-  reset: (params: GameParams) => void,
+  updateFlagCount: (flagsUsed: number) => void,
 }
 
 type GameBoardState = {
@@ -61,7 +61,7 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
     this.setState({grid: this.state.grid});
 
     const flagsUsed = this.state.grid.countFlaggedCells();
-    // TODO: pass this info up
+    this.props.updateFlagCount(flagsUsed);
 
     if ( ! result.gameActive ) {
       console.info("GAME OVER:", result); // DEBUG

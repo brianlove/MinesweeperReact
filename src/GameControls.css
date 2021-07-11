@@ -1,5 +1,6 @@
 .controls {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
 }
 
@@ -14,6 +15,10 @@
 .info {
   display: flex;
   padding: 0.2rem 0;
+}
+
+.info > div {
+  margin-left: 0.5rem;
 }
 
 .invalid {

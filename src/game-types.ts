@@ -4,12 +4,13 @@ interface GameParams {
   mines: number,
 }
 
-type GameState = {
+interface GameState {
   size: number,
   mines: number,
   flagsUsed: number,
   isGameActive: boolean,
   didPlayerWin: boolean,
+  gameKey: number,
 }
 
 export type {

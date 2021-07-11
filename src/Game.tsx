@@ -18,11 +18,13 @@ class Game extends React.Component<{}, GameState> {
       flagsUsed: 0,
       isGameActive: true,
       didPlayerWin: false,
+      gameKey: 0,
     }
     console.info("Game:", this); // DEBUG
 
     this.onGameFinished = this.onGameFinished.bind(this);
     this.onGameReset = this.onGameReset.bind(this);
+    this.onUpdateFlagCount = this.onUpdateFlagCount.bind(this);
   }
 
   onGameFinished(didPlayerWin: boolean|undefined) {
@@ -35,10 +37,21 @@ class Game extends React.Component<{}, GameState> {
   }
 
   onGameReset({size, mines}: GameParams) {
+    console.info("<Game> reset:", {size, mines}); // DEBUG
     this.setState({
       size: size,
       mines: mines,
       flagsUsed: 0,
+      isGameActive: true,
+      didPlayerWin: false,
+      gameKey: this.state.gameKey + 1,
+    });
+  }
+
+  onUpdateFlagCount(flagsUsed: number) {
+    this.setState({
+      ...this.state,
+      flagsUsed: flagsUsed,
     });
   }
 
@@ -56,8 +69,8 @@ class Game extends React.Component<{}, GameState> {
       <div className="minesweeper">
         <div className="container">
           <h1>MinesweeperReact</h1>
-          <GameControls></GameControls>
-          <GameBoard gameState={this.state} gameFinished={this.onGameFinished} reset={this.onGameReset}></GameBoard>
+          <GameControls gameParams={{size: this.state.size, mines: this.state.mines}} flagsUsed={this.state.flagsUsed} reset={this.onGameReset}></GameControls>
+          <GameBoard gameState={this.state} gameFinished={this.onGameFinished} updateFlagCount={this.onUpdateFlagCount} key={this.state.gameKey}></GameBoard>
 
           {notifications}
         </div>
