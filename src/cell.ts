@@ -5,7 +5,7 @@ export default class Cell {
   hasMine: boolean;
   hasFlag: boolean;
   isRevealed: boolean;
-  numAdjacent: number|null;
+  numAdjacent: number;
 
   constructor({row, col}: {row: number, col: number}) {
     this.row = row;

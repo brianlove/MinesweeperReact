@@ -4,30 +4,37 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import GameControls from './GameControls';
 
+import { GameParams, GameState } from './game-types';
+
 import './Game.css';
 
-type GameState = {
-  isGameActive: boolean,
-  didPlayerWin: boolean,
-  size: number,
-  mines: number,
-  flagsUsed: number,
-}
 
 class Game extends React.Component<{}, GameState> {
-  // size = 8;
-  // mines = 8;
-
   constructor(props: any) {
     super(props);
     this.state = {
-      isGameActive: true,
-      didPlayerWin: false,
       size: 8,
       mines: 8,
       flagsUsed: 0,
+      isGameActive: true,
+      didPlayerWin: false,
     }
     console.info("Game:", this); // DEBUG
+
+    this.onGameFinished = this.onGameFinished.bind(this);
+    this.onGameReset = this.onGameReset.bind(this);
+  }
+
+  onGameFinished(didPlayerWin: boolean|undefined) {
+    console.info("Game over - player won?", didPlayerWin); // DEBUG
+  }
+
+  onGameReset({size, mines}: GameParams) {
+    this.setState({
+      size: size,
+      mines: mines,
+      flagsUsed: 0,
+    });
   }
 
   render() {
@@ -36,7 +43,7 @@ class Game extends React.Component<{}, GameState> {
         <div className="container">
           <h1>MinesweeperReact</h1>
           <GameControls></GameControls>
-          <GameBoard size={this.state.size} mines={this.state.mines}></GameBoard>
+          <GameBoard gameState={this.state} gameFinished={this.onGameFinished} reset={this.onGameReset}></GameBoard>
         </div>
       </div>
     )
