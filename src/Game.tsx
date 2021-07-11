@@ -27,6 +27,11 @@ class Game extends React.Component<{}, GameState> {
 
   onGameFinished(didPlayerWin: boolean|undefined) {
     console.info("Game over - player won?", didPlayerWin); // DEBUG
+    this.setState({
+      ...this.state,
+      isGameActive: false,
+      didPlayerWin: didPlayerWin || false,
+    })
   }
 
   onGameReset({size, mines}: GameParams) {
@@ -38,12 +43,23 @@ class Game extends React.Component<{}, GameState> {
   }
 
   render() {
+    let notifications;
+    if ( !this.state.isGameActive ) {
+      if ( this.state.didPlayerWin ) {
+        notifications = <div className="notifications victory">You won!</div>
+      } else {
+        notifications = <div className="notifications defeat">You lose!</div>
+      }
+    }
+
     return (
       <div className="minesweeper">
         <div className="container">
           <h1>MinesweeperReact</h1>
           <GameControls></GameControls>
           <GameBoard gameState={this.state} gameFinished={this.onGameFinished} reset={this.onGameReset}></GameBoard>
+
+          {notifications}
         </div>
       </div>
     )
