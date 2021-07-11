@@ -22,7 +22,6 @@ type GameBoardState = {
 class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
   constructor(props: GameBoardProps) {
     super(props);
-    console.info("GameBoard:", props); // DEBUG
 
     this.state = {
       grid: new Grid(props.gameState.size, props.gameState.mines),
@@ -30,12 +29,9 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
 
     this.clickCell = this.clickCell.bind(this);
     this.toggleFlag = this.toggleFlag.bind(this);
-
-    console.info("GameBoard state:", this.state); // DEBUG
   }
 
   clickCell(clickedCell: Cell) {
-    console.info("GameBoard.clickCell():", clickedCell);
     if ( ! this.props.gameState.isGameActive ) {
       return;
     }
@@ -46,7 +42,6 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
     this.setState({grid: this.state.grid});
 
     if ( !result.gameActive ) {
-      console.info("GAME OVER:", result); // DEBUG
       this.props.gameFinished(result?.playerVictory);
     }
   }
@@ -64,7 +59,6 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
     this.props.updateFlagCount(flagsUsed);
 
     if ( ! result.gameActive ) {
-      console.info("GAME OVER:", result); // DEBUG
       this.props.gameFinished(result?.playerVictory);
     }
   }
@@ -77,7 +71,6 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
       });
       return <div className="row" key={rx}>{renderedRow}</div>
     });
-    console.info("--renderedGrid:", renderedGrid); // DEBUG
 
     return (
       <div className="game-board">

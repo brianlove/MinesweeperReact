@@ -20,7 +20,6 @@ class Game extends React.Component<{}, GameState> {
       didPlayerWin: false,
       gameKey: 0,
     }
-    console.info("Game:", this); // DEBUG
 
     this.onGameFinished = this.onGameFinished.bind(this);
     this.onGameReset = this.onGameReset.bind(this);
@@ -28,7 +27,6 @@ class Game extends React.Component<{}, GameState> {
   }
 
   onGameFinished(didPlayerWin: boolean|undefined) {
-    console.info("Game over - player won?", didPlayerWin); // DEBUG
     this.setState({
       ...this.state,
       isGameActive: false,
@@ -37,7 +35,6 @@ class Game extends React.Component<{}, GameState> {
   }
 
   onGameReset({size, mines}: GameParams) {
-    console.info("<Game> reset:", {size, mines}); // DEBUG
     this.setState({
       size: size,
       mines: mines,

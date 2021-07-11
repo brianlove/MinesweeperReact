@@ -17,13 +17,11 @@ type GameBoardCellProps = {
 function GameBoardCell(props: GameBoardCellProps) {
   function clickCell(e: MouseEvent) {
     e.preventDefault();
-    console.info("<cell> clicked", e); // DEBUG
     props.onCellClick(props.cell);
   }
 
   function flagCell(e: MouseEvent) {
     e.preventDefault();
-    console.info("<cell> flagged:", e); // DEBUG
     props.onToggleFlag(props.cell);
   }
 
